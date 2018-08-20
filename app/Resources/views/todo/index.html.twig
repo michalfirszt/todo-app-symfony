@@ -2,4 +2,21 @@
 
 {% block body %}
 
+    <table>
+        <thead>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Category</th>
+        </thead>
+        <tbody>
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task.name }}</td>
+            <td>{{ task.description }}</td>
+            <td>{{ task.category }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
 {% endblock %}
