@@ -10,4 +10,18 @@ namespace AppBundle\Repository;
  */
 class TodoRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findOverview()
+    {
+        $sql = "SELECT t.id AS id, 
+                        t.name AS name, 
+                        t.description AS description, 
+                        t.category AS category 
+                        FROM AppBundle:Todo t";
+
+        $result = $this->getEntityManager()
+                        ->createQuery($sql)
+                        ->getResult();
+
+        return $result;
+    }
 }
