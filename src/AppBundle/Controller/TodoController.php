@@ -22,4 +22,18 @@ class TodoController extends Controller
         
         return $this->render('todo/index.html.twig', ['tasks' => $tasks]);
     }
+
+    /**
+     * @Route("/{id}/details", name="details_page")
+     */
+    public function detailsAction($id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $task = $entityManager
+                ->getRepository(Todo::class)
+                ->find($id);
+        
+        return $this->render('todo/details.html.twig', ['task' => $task]);
+    }
 }

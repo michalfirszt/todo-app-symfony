@@ -7,6 +7,7 @@
             <th>Name</th>
             <th>Description</th>
             <th>Category</th>
+            <th></th>
         </thead>
         <tbody>
         {% for task in tasks %}
@@ -14,6 +15,9 @@
             <td>{{ task.name }}</td>
             <td>{{ task.description }}</td>
             <td>{{ task.category }}</td>
+            <td>
+                <a href="{{ path('details_page', {id: task.id}) }}"><button>Details</button></a>
+            </td>
         </tr>
         {% endfor %}
         </tbody>

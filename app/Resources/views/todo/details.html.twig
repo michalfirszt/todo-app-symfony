@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h3>{{ task.name }}</h3>
+
+    <ul>
+        <li>{{ task.description }}</li>
+        <li>{{ task.category }}</li>
+        <li>{{ task.priority }}</li>
+        <li>{{ task.createDate | date('Y-m-d | H:i') }}</li>
+        <li>{{ task.dueDate | date('Y-m-d | H:i') }}</li>
+    </ul>
+
+{% endblock %}
