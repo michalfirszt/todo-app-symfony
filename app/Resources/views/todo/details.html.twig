@@ -4,12 +4,22 @@
 
     <h3>{{ task.name }}</h3>
 
-    <ul>
-        <li>{{ task.description }}</li>
-        <li>{{ task.category }}</li>
-        <li>{{ task.priority }}</li>
-        <li>{{ task.createDate | date('Y-m-d | H:i') }}</li>
-        <li>{{ task.dueDate | date('Y-m-d | H:i') }}</li>
+    <ul class="list-group">
+        <li class="list-group-item">
+            {{ task.description }}
+        </li>
+        <li class="list-group-item">
+            {{ task.category }}
+        </li>
+        <li class="list-group-item">
+            {{ task.priority }}
+        </li>
+        <li class="list-group-item">
+            {{ task.createDate | date('Y-m-d | H:i') }}
+        </li>
+        <li class="list-group-item">
+            {{ task.dueDate | date('Y-m-d | H:i') }}
+        </li>
     </ul>
 
 {% endblock %}
