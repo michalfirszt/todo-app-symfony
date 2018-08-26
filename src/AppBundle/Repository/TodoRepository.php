@@ -24,4 +24,16 @@ class TodoRepository extends \Doctrine\ORM\EntityRepository
 
         return $result;
     }
+
+    public function findNumberOfTasks()
+    {
+        $sql = "SELECT count(t.id) AS totalNumber
+                        FROM AppBundle:Todo t";
+
+        $result = $this->getEntityManager()
+                        ->createQuery($sql)
+                        ->getResult();
+
+        return $result;
+    }
 }

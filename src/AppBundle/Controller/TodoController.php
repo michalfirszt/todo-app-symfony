@@ -19,8 +19,15 @@ class TodoController extends Controller
         $tasks = $entityManager
                 ->getRepository(Todo::class)
                 ->findOverview();
+
+        $numberOfRows = $entityManager
+                        ->getRepository(Todo::class)
+                        ->findNumberOfTasks();
         
-        return $this->render('todo/index.html.twig', ['tasks' => $tasks]);
+        $totalNumber = $numberOfRows[0];
+
+        return $this->render('todo/index.html.twig', ['tasks' => $tasks, 
+                                                    'rows' => $totalNumber]);
     }
 
     /**
