@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+        {{ form_row(form.name, {'attr': {'class': 'form-control'}}) }}
+        {{ form_row(form.description, {'attr': {'class': 'form-control'}}) }}
+        {{ form_row(form.category, {'attr': {'class': 'btn btn-primary dropdown-toggle'}}) }}
+        {{ form_row(form.priority, {'attr': {'class': 'btn btn-primary dropdown-toggle'}}) }}
+        {{ form_row(form.dueDate) }}
+        {{ form_row(form.submit, {'attr': {'class': 'btn btn-outline-primary'}}) }}
+    {{ form_end(form) }}
+
+{% endblock %}
