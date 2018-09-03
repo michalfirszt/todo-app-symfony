@@ -24,6 +24,9 @@
                     <a href="{{ path('edit_page', {id: task.id}) }}">
                         <button class="btn btn-outline-info">Edit</button>
                     </a>
+                    <a href="{{ path('delete_task', {id: task.id}) }}">
+                        <button class="btn btn-outline-danger">Delete</button>
+                    </a>
                 </td>
             </tr>
         {% endfor %}

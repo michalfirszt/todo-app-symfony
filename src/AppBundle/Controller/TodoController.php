@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -148,4 +149,29 @@ class TodoController extends Controller
 
         return $this->render('todo/edit.html.twig', ['form' => $editForm->createView()]);
     }
+
+    /**
+     * @Route("/{id}/delete", name="delete_task")
+     * 
+     * @return Response
+     */
+    public function deleteAction($id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $task = $entityManager
+                ->getRepository(Todo::class)
+                ->find($id);
+
+        $entityManager->remove($task);
+        $entityManager->flush();
+
+        $this->addFlash(
+            'notice',
+            'Task Deleted'
+        );
+
+        return $this->redirectToRoute('homepage');
+    }
+
 }
