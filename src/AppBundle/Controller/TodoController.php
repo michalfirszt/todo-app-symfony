@@ -103,4 +103,49 @@ class TodoController extends Controller
         
         return $this->render('todo/create.html.twig', ['form' => $createForm->createView()]);
     }
+
+    /**
+     * @Route("/{id}/edit", name="edit_page")
+     * 
+     * @return Response
+     */
+    public function editAction($id, Request $request)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $task = $entityManager
+                ->getRepository(Todo::class)
+                ->find($id);
+
+        $editForm = $this->createFormBuilder($task)
+                        ->add('name', TextType::class)
+                        ->add('description', TextareaType::class)
+                        ->add('category', ChoiceType::class, ['choices' => $this->categories])
+                        ->add('priority', ChoiceType::class, ['choices' => $this->priorities])
+                        ->add('dueDate', DateType::class)
+                        ->add('submit', SubmitType::class)
+                        ->getForm();
+
+        $editForm->handleRequest($request);
+
+        if($editForm->isSubmitted() && $editForm->isValid())
+        {
+            $task->setName($editForm['name']->getData());
+            $task->setDescription($editForm['description']->getData());
+            $task->setCategory($editForm['category']->getData());
+            $task->setPriority($editForm['priority']->getData());
+            $task->setDueDate($editForm['dueDate']->getData());
+            
+            $entityManager->flush();
+
+            $this->addFlash(
+                'notice',
+                'Task Edited'
+            );
+
+            return $this->redirectToRoute('homepage');
+        }
+
+        return $this->render('todo/edit.html.twig', ['form' => $editForm->createView()]);
+    }
 }
