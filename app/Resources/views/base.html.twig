@@ -30,6 +30,13 @@
         </nav>
 
         <div class="container main">
+
+            {% for message in app.flashes('notice') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
             {% block body %}
             
             {% endblock %}
