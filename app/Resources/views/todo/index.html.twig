@@ -2,6 +2,8 @@
 
 {% block body %}
 
+    {% if tasks|length > 0 %}
+
     <table class="table table-hover">
         <thead>
             <tr class="row">
@@ -32,5 +34,17 @@
         {% endfor %}
         </tbody>
     </table>
+
+    {% else %}
+
+    <div class="jumbotron">
+        <h1>No Tasks</h1>
+        <p>Create first task:</p>
+        <a href="{{ path('create_page') }}">
+            <button class="btn btn-outline-secondary">Create Task</button>
+        </a>
+    </div>
+
+    {% endif %}
 
 {% endblock %}
