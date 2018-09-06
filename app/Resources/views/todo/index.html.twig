@@ -48,3 +48,23 @@
     {% endif %}
 
 {% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script>
+    
+        fetch('/numberOfTasks')
+            .then(function(response) {
+                
+                return response.json();
+            })
+            .then(function(response) {
+
+                let numberOfTasks = parseInt(response.totalNumber);
+            });
+    
+    </script>
+
+{% endblock %}

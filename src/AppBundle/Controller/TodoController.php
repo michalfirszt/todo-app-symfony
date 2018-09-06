@@ -35,14 +35,27 @@ class TodoController extends Controller
                 ->getRepository(Todo::class)
                 ->findOverview();
 
-        $numberOfRows = $entityManager
+        return $this->render('todo/index.html.twig', ['tasks' => $tasks]);
+    }
+
+    /**
+     * @Route("/numberOfTasks", name="numberOfTasks", methods={"GET"})
+     * 
+     * @return Response
+     */
+    public function categortAction()
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $numberOfTasks = $entityManager
                         ->getRepository(Todo::class)
                         ->findNumberOfTasks();
         
-        $totalNumber = $numberOfRows[0];
+        $totalNumber = $numberOfTasks[0];
 
-        return $this->render('todo/index.html.twig', ['tasks' => $tasks, 
-                                                    'rows' => $totalNumber]);
+        $response = new Response(json_encode($totalNumber));
+
+        return $response;
     }
 
     /**
